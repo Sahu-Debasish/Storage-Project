@@ -30,17 +30,8 @@ async function uploadFile() {
         const data = await response.json();
 
         if (response.ok) {
-            // Display the CID (Content Identifier) of the uploaded file as a link
-            const link = document.createElement("a");
-            link.href = `https://ipfs.io/ipfs/${data.value.cid}`;
-            link.textContent = `File uploaded successfully! Open link`;
-
-            // Clear the resultDiv and append the link
-            resultDiv.innerHTML = "";
-            resultDiv.appendChild(link);
-
-            // Enable the share button
-            document.getElementById("shareButton").disabled = false;
+            // Display the CID (Content Identifier) and Filename of the uploaded file
+            resultDiv.textContent = `File uploaded successfully! CID: ${data.value.cid}, Filename: ${file.name}`;
         } else {
             // Handle the error
             resultDiv.textContent = `Error: ${data.error.message}`;
@@ -57,15 +48,16 @@ async function uploadFile() {
 function copyLink() {
     const resultDiv = document.getElementById("result");
 
-    // Get the text content (link) from the resultDiv
-    const link = resultDiv.firstChild.href;
+    // Get the text content (CID) and Filename from the resultDiv
+    const cid = resultDiv.textContent.split(": ")[1].split(",")[0];
+    const filename = resultDiv.textContent.split(": ")[2].trim();
 
-    // Create a textarea element to copy the link to the clipboard
+    // Create a textarea element to copy the text to the clipboard
     const textarea = document.createElement("textarea");
-    textarea.value = link;
+    textarea.value = `https://ipfs.io/ipfs/${cid}/${encodeURIComponent(filename)}`;
     document.body.appendChild(textarea);
 
-    // Select and copy the link
+    // Select and copy the text
     textarea.select();
     document.execCommand("copy");
 
@@ -75,23 +67,27 @@ function copyLink() {
     alert("Link copied to clipboard!");
 }
 
-function shareLink() {
+async function shareLink() {
     const resultDiv = document.getElementById("result");
+    const cid = resultDiv.textContent.split(": ")[1].split(",")[0];
+    const filename = resultDiv.textContent.split(": ")[2].trim();
+    
+    const shareLink = `https://ipfs.io/ipfs/${cid}/${encodeURIComponent(filename)}`;
 
-    // Get the text content (link) from the resultDiv
-    const link = resultDiv.firstChild.href;
-
-    if (navigator.share) {
-        // Use the Web Share API if available
-        navigator.share({
-            title: "IPFS File",
-            text: "Check out this file on IPFS!",
-            url: link,
-        })
-        .then(() => console.log('Successful share'))
-        .catch((error) => console.log('Error sharing:', error));
-    } else {
-        // Fallback for browsers that do not support Web Share API
-        alert("Sharing not supported on this browser. You can manually share the link.");
+    try {
+        // Check if Web Share API is available
+        if (navigator.share) {
+            await navigator.share({
+                title: "IPFS File Link",
+                text: "Check out this IPFS file link!",
+                url: shareLink,
+            });
+        } else {
+            // Fallback for browsers that do not support Web Share API
+            alert("Web Share API is not supported on this browser.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Error sharing the link.");
     }
 }
