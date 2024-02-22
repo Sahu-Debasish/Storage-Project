@@ -1,74 +1,86 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 20px;
-    background-color: #f5f5f5;
-    text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    background-color: #f4f4f4;
 }
 
 h2 {
     color: #333;
 }
 
-#fileInput {
-    margin-top: 10px;
-    padding: 10px;
-}
-
-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
 #result {
     margin-top: 20px;
     padding: 10px;
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    word-wrap: break-word;
 }
 
 .uploading-message {
     display: none;
     margin-top: 10px;
-    color: #777;
+    color: #333;
 }
 
-#copyButton, #shareButton {
+input[type="file"] {
+    display: none;
+}
+
+label {
+    display: block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button {
     margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-#copyButton:disabled, #shareButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+button:active {
+    background-color: #45a049;
 }
 
-#copyButton:hover, #shareButton:hover:enabled {
-    background-color: #0056b3;
+/* File input styling */
+#fileInputContainer {
+    position: relative;
+    width: 100%;
+}
+
+#fileInput {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#fileInputLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    #result, #fileInputLabel, button {
+        width: 100%;
+    }
 }
