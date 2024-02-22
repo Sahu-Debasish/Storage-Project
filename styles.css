@@ -1,60 +1,25 @@
 body {
     font-family: 'Arial', sans-serif;
-    margin: 20px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
 }
 
 h2 {
     color: #333;
 }
 
-#result {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    word-wrap: break-word;
-}
-
-.uploading-message {
-    display: none;
-    margin-top: 10px;
-    color: #333;
-}
-
-input[type="file"] {
-    display: none;
-}
-
-label {
-    display: block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:active {
-    background-color: #45a049;
-}
-
-/* File input styling */
 #fileInputContainer {
     position: relative;
-    width: 100%;
+    margin-top: 20px;
 }
 
 #fileInput {
@@ -78,9 +43,38 @@ button:active {
     cursor: pointer;
 }
 
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #45a049;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    word-wrap: break-word;
+}
+
+.uploading-message {
+    display: none;
+    margin-top: 10px;
+    color: #333;
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
-    #result, #fileInputLabel, button {
+    #fileInputLabel, button {
         width: 100%;
     }
 }
