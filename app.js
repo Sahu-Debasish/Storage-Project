@@ -54,7 +54,7 @@ function copyLink() {
 
     // Create a textarea element to copy the text to the clipboard
     const textarea = document.createElement("textarea");
-    textarea.value = `https://ipfs.io/ipfs/${cid}/${encodeURIComponent(filename)}`;
+    textarea.value = `https://cloudflare-ipfs.com/ipfs/${cid}/${encodeURIComponent(filename)}`;
     document.body.appendChild(textarea);
 
     // Select and copy the text
@@ -72,7 +72,7 @@ async function shareLink() {
     const cid = resultDiv.textContent.split(": ")[1].split(",")[0];
     const filename = resultDiv.textContent.split(": ")[2].trim();
     
-    const shareLink = `https://ipfs.io/ipfs/${cid}/${encodeURIComponent(filename)}`;
+    const shareLink = `https://cloudflare-ipfs.com/ipfs/${cid}/${encodeURIComponent(filename)}`;
 
     try {
         // Check if Web Share API is available
